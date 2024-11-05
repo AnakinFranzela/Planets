@@ -1,7 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using Planets.Data;
+using Planets.Repositories;
+using Planets.Repositories.IRepositories;
+using Planets.Services;
+using Planets.Services.IServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<PlanetsDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
