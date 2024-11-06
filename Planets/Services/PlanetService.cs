@@ -27,7 +27,7 @@ namespace Planets.Services
             return _repository.FindById(id);
         }
 
-        public List<Planet> GetCategoryList()
+        public List<Planet> GetPlanetList()
         {
             return _repository.ToList();
         }
@@ -46,6 +46,27 @@ namespace Planets.Services
             {
                 return false;
             }
+        }
+
+        public bool UpdatePlanet(Planet planet)
+        {
+            try
+            {
+                if (!ValidatePlanet(planet))
+                {
+                    return false;
+                }
+                return _repository.Update(planet);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool DeletePlanet(int id)
+        {
+            return _repository.Delete(id);
         }
 
         public bool ValidatePlanet(Planet planet)
